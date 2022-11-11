@@ -6,7 +6,7 @@ import email.message
 
 def enviar_email():
 
-    EMAILS = ['andrewdias2016@gmail.com','arthurnascifar@outlook.com','vivianprodrigues@gmail.com']
+    EMAILS = ['andrewdias2016@gmail.com','arthurnascifar@outlook.com','vivianprodrigues@gmail.com','gersonlima8021@gmail.com','rodrigomagalhao@hotmail.com']
 
     for mail in EMAILS:
         corpo_email = """
@@ -18,6 +18,7 @@ def enviar_email():
         msg['Subject'] = "ANDAMENTO NO SEI"
         msg['From'] = 'andrewdias2016@gmail.com'
         msg['To'] = mail
+        password = 'nfhhbejafjyslwrk' 
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email )
 
@@ -30,7 +31,7 @@ def enviar_email():
 
 
 
-print("Procurando andamentos no processo...")
+
 ANDAMENTO = []
 
 req = requests.get("https://www10.tjrj.jus.br/sei/modulos/pesquisa/md_pesq_processo_exibir.php?LyFApQuxweZlHTLXUD6u1y7tX4d3oMBqI068jRzh-jmD6lRsMfC_MSxrkq7qMXzIfz0u57sxCObxfxX7102s0OPclxe8lW1cZe2v7-DLgdDvkB0gDy6lhfwnU-GWM4wV")
@@ -60,32 +61,34 @@ for val in ANDAMENTO:
 ListaDeProtocoloInicial = valores[0]
 ListaDeAndamentoInicial = valores[1]
 
-
+print(f"Andamento: {ListaDeProtocoloInicial}")
+print(f"Protocolo: {ListaDeAndamentoInicial}" )
+print("Procurando andamentos no processo...")
 while True:
     try:
         andamento = []
 
-        req = requests.get("https://www10.tjrj.jus.br/sei/modulos/pesquisa/md_pesq_processo_exibir.php?LyFApQuxweZlHTLXUD6u1y7tX4d3oMBqI068jRzh-jmD6lRsMfC_MSxrkq7qMXzIfz0u57sxCObxfxX7102s0OPclxe8lW1cZe2v7-DLgdDvkB0gDy6lhfwnU-GWM4wV")
+        reqs = requests.get("https://www10.tjrj.jus.br/sei/modulos/pesquisa/md_pesq_processo_exibir.php?LyFApQuxweZlHTLXUD6u1y7tX4d3oMBqI068jRzh-jmD6lRsMfC_MSxrkq7qMXzIfz0u57sxCObxfxX7102s0OPclxe8lW1cZe2v7-DLgdDvkB0gDy6lhfwnU-GWM4wV")
 
-        html = req.text
-        soup = BeautifulSoup(html, "html.parser")
-        tags_a = soup.findAll("caption")
-
-
+        htmls = reqs.text
+        soups = BeautifulSoup(htmls, "html.parser")
+        tags = soups.findAll("caption")
 
 
-        for tag in tags_a:
-            for i in tag:
+
+
+        for t in tags:
+            for i in t:
                 try:
-                    numeros = "".join(char for char in i if char.isdigit())
-                    andamento.append(numeros)
+                    numero = "".join(char for char in i if char.isdigit())
+                    andamento.append(numero)
                 except:
                     pass
 
 
 
         VALORES = []
-        for val in ANDAMENTO:
+        for val in andamento:
             VALORES.append(int(val))
 
         
@@ -96,12 +99,16 @@ while True:
             print("TEVE ANDAMENTO NO PROCESSO")
             enviar_email()
             ListaDeAndamentoInicial = ListaDeAndamento
+            print(f"Andamento Atual: {ListaDeProtocolo}")
+            print(f"Protocolo Atual: {ListaDeAndamento}")
         if ListaDeProtocolo != ListaDeProtocoloInicial:
             print("TEVE ANDAMENTO NO PROCESSO")
             enviar_email()
             ListaDeProtocoloInicial = ListaDeProtocolo
+            print(f"Andamento Atual: {ListaDeProtocolo}")
+            print(f"Protocolo Atual: {ListaDeAndamento}")
         
-        time.sleep(15)
+        time.sleep(20)
 
     except Exception as e:
         print(e)
