@@ -6,7 +6,7 @@ import email.message
 
 def enviar_email():
 
-    EMAILS = ['andrewdias2016@gmail.com','arthurnascifar@outlook.com','vivianprodrigues@gmail.com','gersonlima8021@gmail.com','rodrigomagalhao@hotmail.com']
+    EMAILS = []
 
     for mail in EMAILS:
         corpo_email = """
@@ -18,7 +18,7 @@ def enviar_email():
         msg['Subject'] = "ANDAMENTO NO SEI"
         msg['From'] = 'andrewdias2016@gmail.com'
         msg['To'] = mail
-        password = 'nfhhbejafjyslwrk' 
+        password = 'senha' 
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email )
 
