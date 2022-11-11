@@ -18,7 +18,6 @@ def enviar_email():
         msg['Subject'] = "ANDAMENTO NO SEI"
         msg['From'] = 'andrewdias2016@gmail.com'
         msg['To'] = mail
-        password = 'jwunxnnspdayjsrn' 
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email )
 
@@ -96,13 +95,13 @@ while True:
         if ListaDeAndamento != ListaDeAndamentoInicial:
             print("TEVE ANDAMENTO NO PROCESSO")
             enviar_email()
-            ListaDeAndamentoInicial += 1
+            ListaDeAndamentoInicial = ListaDeAndamento
         if ListaDeProtocolo != ListaDeProtocoloInicial:
             print("TEVE ANDAMENTO NO PROCESSO")
             enviar_email()
-            ListaDeProtocoloInicial += 1
+            ListaDeProtocoloInicial = ListaDeProtocolo
         
-        time.sleep(10)
+        time.sleep(15)
 
     except Exception as e:
         print(e)
