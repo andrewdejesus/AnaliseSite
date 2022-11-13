@@ -20,11 +20,8 @@ def movi_protocolo(ListaDeProtocolo):
         for i in TEOR[ListaDeProtocolo]:
             andamento.append(i)
         
-        a = str(andamento[2])
-        for i in a.split():
-            movimentacao.append(i)
+        return andamento[2], andamento[8]
         
-        return movimentacao[1]
         
 
     except Exception as e:
