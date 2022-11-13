@@ -12,7 +12,7 @@ def enviar_email_prot():
     for mail in EMAILS:
         corpo_email = f"""
         <p>OLÁ,</p>
-        <p>A última movimentação foi: {movi_protocolo(ListaDeProtocolo)}.</p>
+        <p>A última movimentação foi na lista de protocolos: {movi_protocolo(ListaDeProtocolo)}.</p>
         """
 
         msg = email.message.Message()
@@ -37,7 +37,7 @@ def enviar_email_and():
     for mail in EMAILS:
         corpo_email = f"""
         <p>OLÁ,</p>
-        <p>A última movimentação foi: {movi_andamento(ListaDeAndamento)}.</p>
+        <p>A última movimentação foi na lista de andamentos: {movi_andamento(ListaDeAndamento)}.</p>
         """
 
         msg = email.message.Message()
