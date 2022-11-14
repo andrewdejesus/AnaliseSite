@@ -52,7 +52,7 @@ def movi_andamento(ListaDeAndamento):
         for i in andamento:
             movimentacao.append(i)
         
-        return movimentacao[3],movimentacao[5]
+        return movimentacao[5],movimentacao[3]
         
 
         
