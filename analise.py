@@ -44,7 +44,7 @@ def enviar_email_and():
         msg['Subject'] = "ANDAMENTO NO SEI"
         msg['From'] = 'andrewdias2016@gmail.com'
         msg['To'] = mail
-        password = 'sasdxkbawhllrjec' 
+        password = 'senha' 
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email)
 
